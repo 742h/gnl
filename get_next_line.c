@@ -6,7 +6,7 @@
 /*   By: hassaleh <hassaleh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 21:38:29 by hassaleh          #+#    #+#             */
-/*   Updated: 2024/03/25 01:32:20 by hassaleh         ###   ########.fr       */
+/*   Updated: 2024/03/25 02:55:30 by hassaleh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_rightnow(char *result, char *buffer)
 			i++;
 			break;
 		}
-		printf("\e[1;35m{%s}\n", new);
+		// printf("\e[1;35m{%s}\n", new);
 	}
 	if (!result)
 	{
@@ -76,8 +76,8 @@ char	*get_next_line(int fd)
 		if (bytes > 0)
 		{
 			result = ft_rightnow(result, buffer);
-			printf("\033[0;31m.{%s}\n", buffer);
-			printf("\033[0;32m{%s}\n", result);
+			// printf("\033[0;31m.{%s}\n", buffer);
+			// printf("\033[0;32m{%s}\n", result);
 		}
 		else if (bytes == -1)
 			return (NULL);
@@ -89,12 +89,12 @@ char	*get_next_line(int fd)
 	return (result);
 }
 
-int main()
-{
-	int fd = open("test1.txt", O_RDONLY);
-	char *line = get_next_line(fd);
-	printf("\e[0;33m%s\n", line);
-	char *line2 = get_next_line(fd);
-	printf("\e[0;33m%s\n", line2);
-	free(line);
-}
+// int main()
+// {
+// 	int fd = open("test1.txt", O_RDONLY);
+// 	char *line = get_next_line(fd);
+// 	printf("\e[0;33m%s\n", line);
+// 	char *line2 = get_next_line(fd);
+// 	printf("\e[0;33m%s\n", line2);
+// 	free(line);
+// }
