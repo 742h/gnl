@@ -6,7 +6,7 @@
 /*   By: hassaleh <hassaleh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 17:31:19 by hassaleh          #+#    #+#             */
-/*   Updated: 2024/03/16 02:35:05 by hassaleh         ###   ########.fr       */
+/*   Updated: 2024/03/25 01:29:45 by hassaleh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-# define BUFFER_SIZE 0
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1000
+# endif
 
 char	*get_next_line(int fd);
 void	*ft_calloc(size_t count, size_t size);
