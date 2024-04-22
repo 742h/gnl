@@ -6,53 +6,36 @@
 /*   By: hassaleh <hassaleh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:19:19 by hassaleh          #+#    #+#             */
-/*   Updated: 2024/03/20 18:02:30 by hassaleh         ###   ########.fr       */
+/*   Updated: 2024/04/22 09:51:07 by hassaleh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <string.h>
 
-void	*ft_calloc(size_t count, size_t size)
+size_t	ft_strlen(const char *str)
 {
-	void	*ptr;
+	size_t	i;
 
-	if (size && count > SIZE_MAX / size)
-		return (NULL);
-	ptr = (void *) malloc (count * size);
-	if (ptr == NULL)
-		return (NULL);
-	else
-		ft_bzero (ptr, count * size);
-	return (ptr);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*j;
-	size_t			i;
-
-	j = (unsigned char *)s;
 	i = 0;
-	while (i < n)
-	{
-		j[i] = 0;
+	if (!str)
+		return (0);
+	while (str[i])
 		i++;
-	}
+	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int				i;
 	int				k;
 	char			*str;
 
-	if (!s1 && !s1)
+	if (!s1 && !s2)
 		return (NULL);
 	else if (!s1)
-		return (strdup(s2));
+		return (ft_strdup(s2));
 	else if (!s2)
-		return (strdup(s1));
+		return (ft_strdup(s1));
 	k = 0;
 	str = (char *)malloc(sizeof (char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
@@ -60,9 +43,47 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = 0;
 	while (s1[i])
 		str[k++] = s1[i++];
+	free(s1);
 	i = 0;
 	while (s2[i])
 		str[k++] = s2[i++];
 	str[k] = '\0';
 	return (str);
+}
+
+char	*ft_strdup(const char *src)
+{
+	int				i;
+	int				j;
+	char			*dest;
+	unsigned char	*s1;
+
+	s1 = (unsigned char *) src;
+	j = 0;
+	i = ft_strlen(src);
+	dest = (char *)malloc(sizeof(char) * i +1);
+	if (!(dest))
+		return (0);
+	while (s1[j] != '\0')
+	{
+		dest[j] = s1[j];
+		j++;
+	}
+	dest[j] = '\0';
+	return (dest);
+}
+
+char	*ft_strchr(const char *str, int a)
+{
+	if (!str)
+		return(0);
+	if (a == '\0')
+		return ((char *)&str[ft_strlen(str)]);
+	while (*str)
+	{
+		if (*str == (char)a)
+			return ((char *)str);
+		str++;
+	}
+	return (0);
 }
