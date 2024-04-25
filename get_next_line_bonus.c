@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hassaleh <hassaleh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 21:38:29 by hassaleh          #+#    #+#             */
-/*   Updated: 2024/04/23 18:52:17 by hassaleh         ###   ########.fr       */
+/*   Created: 2024/04/22 18:21:56 by hassaleh          #+#    #+#             */
+/*   Updated: 2024/04/23 19:32:59 by hassaleh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_remains(char *saved)
 {
@@ -96,14 +96,14 @@ char	*ft_rightnow(int fd, char *result)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	char static	*result;
+	char static	*result[OPEN_MAX];
 
-	if (fd < 0 || BUFFER_SIZE < 1 || BUFFER_SIZE > INT_MAX)
+	if (fd < 0 || BUFFER_SIZE < 1 || fd > OPEN_MAX || BUFFER_SIZE > INT_MAX)
 		return (0);
-	result = ft_rightnow(fd, result);
-	if (!result)
+	result[fd] = ft_rightnow(fd, result[fd]);
+	if (!result[fd])
 		return (0);
-	line = ft_extract(result);
-	result = ft_remains(result);
+	line = ft_extract(result[fd]);
+	result[fd] = ft_remains(result[fd]);
 	return (line);
 }
